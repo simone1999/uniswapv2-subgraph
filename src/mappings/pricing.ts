@@ -3,12 +3,15 @@ import { Pair, Token, Bundle } from '../types/schema'
 import { BigDecimal, Address, BigInt } from '@graphprotocol/graph-ts/index'
 import { ZERO_BD, factoryContract, ADDRESS_ZERO, ONE_BD, UNTRACKED_PAIRS } from './helpers'
 
-const WETH_ADDRESS = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
-const USDC_WETH_PAIR = '0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc' // created 10008355
-const DAI_WETH_PAIR = '0xa478c2975ab1ea89e8196811f51a7b7ade33eb11' // created block 10042267
-const USDT_WETH_PAIR = '0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852' // created block 10093341
+const WETH_ADDRESS = '0x0eb9036cbe0f052386f36170c6b07ef0a0e3f710'  // needs to be lower case
+// const USDC_WETH_PAIR = '0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc' // created 10008355
+// const DAI_WETH_PAIR = '0xa478c2975ab1ea89e8196811f51a7b7ade33eb11' // created block 10042267
+// const USDT_WETH_PAIR = '0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852' // created block 10093341
 
 export function getEthPriceInUSD(): BigDecimal {
+  return ONE_BD
+  // todo: after having a stable coin on Bitgert, reenable USD calculation
+  /*
   // fetch eth prices for each stablecoin
   let daiPair = Pair.load(DAI_WETH_PAIR) // dai is token0
   let usdcPair = Pair.load(USDC_WETH_PAIR) // usdc is token0
@@ -36,37 +39,40 @@ export function getEthPriceInUSD(): BigDecimal {
   } else {
     return ZERO_BD
   }
+  */
 }
 
 // token where amounts should contribute to tracked volume and liquidity
+// todo: add new supported tokens here
+// needs to be lower case addresses, not checksummed.
 let WHITELIST: string[] = [
-  '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', // WETH
-  '0x6b175474e89094c44da98b954eedeac495271d0f', // DAI
-  '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', // USDC
-  '0xdac17f958d2ee523a2206206994597c13d831ec7', // USDT
-  '0x0000000000085d4780b73119b644ae5ecd22b376', // TUSD
-  '0x5d3a536e4d6dbd6114cc1ead35777bab948e3643', // cDAI
-  '0x39aa39c021dfbae8fac545936693ac917d5e7563', // cUSDC
-  '0x86fadb80d8d2cff3c3680819e4da99c10232ba0f', // EBASE
-  '0x57ab1ec28d129707052df4df418d58a2d46d5f51', // sUSD
-  '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2', // MKR
-  '0xc00e94cb662c3520282e6f5717214004a7f26888', // COMP
-  '0x514910771af9ca656af840dff83e8264ecf986ca', //LINK
-  '0x960b236a07cf122663c4303350609a66a7b288c0', //ANT
-  '0xc011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f', //SNX
-  '0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e', //YFI
-  '0xdf5e0e81dff6faf3a7e52ba697820c5e32d806a8', // yCurv
-  '0x853d955acef822db058eb8505911ed77f175b99e', // FRAX
-  '0xa47c8bf37f92abed4a126bda807a7b7498661acd', // WUST
-  '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', // UNI
-  '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599' // WBTC
+  '0x0eb9036cbe0f052386f36170c6b07ef0a0e3f710', // WBRISE
+  '0x0e11dce06ef2fed6f78cef5144f970e1184b4298', // SPHYNX
+  '0x71946a5c9da7c95ee804a9be561ec15a3f286a7d', // BPAD
+  '0x41c5ae56681fb19334ecf7d914919805dae2ec8f', // BROGE
+  '0x9b8535dd9281e48484725bc9eb6ed2f66cea2a36', // BRZILLA
+  '0x1a8a039007186d7640c1d7cd7c2606e333d04e03', // BTXT
+  '0xb860ecd8400600c13342a751408737235e177077', // ELTG
+  '0x267ae4ba9ce5ef3c87629812596b0d89ecbd81dd', // EVO
+  '0x6d347fdcb302a5879545e01ecee7a176db23dcda', // MAP
+  '0x5b534a2df329195fd7e5c9aca1d9ffbda14a4963', // Miidas
+  '0x2468dad471fa7e03d8029f057cc41742f017d53d', // MIR
+  '0x6718e47e74497d1564ee76d832309144b83ef8e8', // NUMI
+  '0x5d4685c2c75581c67b9d6292a065a767bc214681', // OMNIA
+  '0x31226b28add9062c5064a9bd35ea155f323c6ca6', // PRDS
+  '0x6660a7af57fae695d4a10d645088aba9fb547728', // RLUNA
+  '0xd6447d2fa919811c41a064bdbdab1e281f8de9b2', // VEF
+  '0xc89fcd3e1cf5a355fc41e160d18bac5f624610d4', // WMF
+  '0xb361d5953e21cfde5cd62b89fdf40bc21903a6bb', // YOGO
+  '0x11203a00a9134db8586381c4b2fca0816476b3fd', // YPC
+  '0xb999ea90607a826a3e6e6646b404c3c7d11fa39d', // ICE
 ]
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps
-let MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('400000')
+let MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('0')
 
 // minimum liquidity for price to get tracked
-let MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('2')
+let MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('0')
 
 /**
  * Search through graph to find derived Eth per token.

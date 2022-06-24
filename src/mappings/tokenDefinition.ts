@@ -20,6 +20,9 @@ export class TokenDefinition {
 
   // Get all tokens with a static defintion
   static getStaticDefinitions(): Array<TokenDefinition> {
+    return new Array<TokenDefinition>(0)
+
+    /*
     let staticDefinitions = new Array<TokenDefinition>(6)
 
     // Add DGD
@@ -77,6 +80,7 @@ export class TokenDefinition {
     staticDefinitions.push(tokenHPB)
 
     return staticDefinitions
+    */
   }
 
   // Helper for hardcoded tokens
