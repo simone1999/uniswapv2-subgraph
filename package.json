@@ -6,8 +6,8 @@
   "scripts": {
     "codegen": "graph codegen --output-dir src/types/",
     "build": "graph build",
-    "create-local": "graph create simone1999/uniswap --node http://54.216.66.38:8020/",
-    "deploy-local": "graph deploy simone1999/uniswap --ipfs http://54.216.66.38:5001/ --node http://54.216.66.38:8020/",
+    "create-local": "graph create simone1999/uniswap --node http://34.242.86.140:8020/",
+    "deploy-local": "graph deploy simone1999/uniswap --ipfs http://34.242.86.140:5001/ --node http://34.242.86.140:8020/",
     "deploy": "graph deploy simone1999/uniswap --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
     "deploy-staging": "graph deploy $THE_GRAPH_GITHUB_USER/$THE_GRAPH_SUBGRAPH_NAME /Uniswap --ipfs https://api.staging.thegraph.com/ipfs/ --node https://api.staging.thegraph.com/deploy/",
     "watch-local": "graph deploy simone1999/uniswap --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
